@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Weather App</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div id="background-effect">
+     <img id="weather-anim" src="" alt="weather background" />
+  </div>
+  <style>
+  #background-effect::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to bottom right, var(--bg-start), var(--bg-end));
+    z-index: -1;
+  }
+</style>
+
+
+  <div class="app">
+    <div class="weather-container glass animate-card">
+      <h1 class="title">🌦️ Weather Now</h1>
+
+      <div id="datetime" class="datetime hidden"></div>
+
+      <div class="mode-toggle">
+        <label class="switch">
+          <input type="checkbox" id="themeToggle">
+          <span class="slider"></span>
+        </label>
+        <span class="mode-label">Dark Mode</span>
+      </div>
+
+      <div class="input-group">
+        <input type="text" id="cityInput" placeholder="Enter city name..." autocomplete="off" />
+        <ul id="suggestions" class="suggestions-list"></ul>
+      </div>
+
+      <div class="btn-group">
+        <button onclick="getWeather()">Get Weather</button>
+        <button onclick="useMyLocation()">📍 Use My Location</button>
+      </div>
+
+      <div class="unit-toggle">
+        <label><input type="radio" name="unit" value="metric" checked /> °C</label>
+        <label><input type="radio" name="unit" value="imperial" /> °F</label>
+      </div>
+
+      <div id="weatherResult" class="weather-result hidden">
+        <h2 id="cityName"></h2>
+        <div class="icon-container" id="lottie-icon"></div>
+        <p id="temperature"></p>
+        <p id="condition"></p>
+      </div>
+
+      <div id="forecastContainer" class="forecast-container hidden">
+        <h3>5-Day Forecast</h3>
+        <div id="forecastCards" class="forecast-cards"></div>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

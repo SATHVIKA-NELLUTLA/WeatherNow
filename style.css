@@ -1,0 +1,367 @@
+:root {
+  --bg-start: #e0f7fa;
+  --bg-end: #ffffff;
+  --text-color: #222;
+  --card-bg: rgba(255, 255, 255, 0.2);
+}
+
+.dark {
+  --bg-start: #0f2027;
+  --bg-end: #203a43;
+  --text-color: #f0f0f0;
+  --card-bg: rgba(30, 30, 30, 0.3);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body, html {
+  min-height: 100%;
+  width: 100%;
+  font-family: 'Segoe UI', sans-serif;
+  background: linear-gradient(to bottom right, var(--bg-start), var(--bg-end));
+  transition: background 0.8s ease;
+  color: var(--text-color);
+}
+
+#background-effect {
+  position: fixed;
+  z-index: -1;
+  inset: 0;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  opacity: 0.25;
+  transition: all 0.6s ease-in-out;
+  pointer-events: none;
+}
+
+.app {
+  display: flex;
+  justify-content: center;
+  padding: 40px 20px;
+}
+
+.weather-container {
+  width: 100%;
+  max-width: 500px;
+  padding: 32px 26px;
+  border-radius: 20px;
+  text-align: center;
+  background: var(--card-bg);
+  backdrop-filter: blur(22px);
+  -webkit-backdrop-filter: blur(22px);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  margin-bottom: 40px;
+}
+
+.animate-card {
+  animation: scaleFadeIn 1s ease-out forwards;
+}
+
+@keyframes scaleFadeIn {
+  from {
+    transform: scale(0.95);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.title {
+  font-size: 2em;
+  margin-bottom: 20px;
+  color: var(--text-color);
+}
+
+/* ========== Dark Mode Slider ========== */
+.mode-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 48px;
+  height: 24px;
+}
+
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0; left: 0;
+  right: 0; bottom: 0;
+  background-color: #ccc;
+  border-radius: 34px;
+  transition: .4s;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 18px;
+  width: 18px;
+  left: 3px;
+  bottom: 3px;
+  background-color: white;
+  border-radius: 50%;
+  transition: .4s;
+}
+
+input:checked + .slider {
+  background-color: #2196F3;
+}
+
+input:checked + .slider:before {
+  transform: translateX(24px);
+}
+
+/* ========== Input ========== */
+.input-group {
+  position: relative;
+  width: 100%;
+}
+
+input[type="text"] {
+  width: 100%;
+  padding: 12px 14px;
+  border-radius: 12px;
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  font-size: 1rem;
+  background: rgba(255, 255, 255, 0.95);
+  transition: border 0.3s ease;
+}
+
+input[type="text"]:focus {
+  outline: none;
+  border-color: #00bcd4;
+}
+
+/* ========== Button ========== */
+button {
+  padding: 10px 18px;
+  border: none;
+  background-color: #00bcd4;
+  color: white;
+  border-radius: 10px;
+  cursor: pointer;
+  font-weight: bold;
+  margin: 15px 0;
+  font-size: 1rem;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #0097a7;
+}
+
+/* ========== Suggestions ========== */
+.suggestions-list {
+  list-style: none;
+  margin: 8px 0 0;
+  padding: 0;
+  width: 100%;
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 10px;
+  max-height: 160px;
+  overflow-y: auto;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  position: absolute;
+  z-index: 1000;
+}
+
+.suggestions-list li {
+  padding: 10px 14px;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.suggestions-list li:hover {
+  background-color: #f1f1f1;
+}
+
+.no-suggestion {
+  color: #888;
+  font-style: italic;
+  pointer-events: none;
+}
+
+/* ========== Main Result ========== */
+.weather-result {
+  transition: all 0.4s ease;
+  color: var(--text-color);
+}
+
+.icon-container {
+  margin: 15px 0;
+  width: 150px;
+  height: 150px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.weather-icon {
+  width: 120px;
+  height: 120px;
+  animation: fadeIn 0.6s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* ========== Forecast ========== */
+.forecast-container {
+  margin-top: 20px;
+  text-align: left;
+}
+
+.forecast-container h3 {
+  margin-bottom: 10px;
+  color: var(--text-color);
+}
+
+.forecast-cards {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.forecast-card {
+  flex: 1 1 calc(20% - 10px);
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 10px;
+  text-align: center;
+  padding: 10px;
+  color: var(--text-color);
+  font-size: 0.9rem;
+  backdrop-filter: blur(8px);
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+.forecast-card img {
+  width: 50px;
+  height: 50px;
+  margin: 6px 0;
+}
+
+.hidden {
+  display: none;
+}
+
+/* ========== Responsive ========== */
+@media (max-width: 600px) {
+  .forecast-cards {
+    flex-direction: column;
+  }
+
+  .forecast-card {
+    flex: 1 1 100%;
+  }
+
+  .weather-container {
+    padding: 20px 15px;
+  }
+
+  .icon-container {
+    width: 120px;
+    height: 120px;
+  }
+
+  .weather-icon {
+    width: 100px;
+    height: 100px;
+  }
+}
+
+.active-suggestion {
+  background-color: #e0f7fa;
+  font-weight: bold;
+}
+
+.datetime {
+  font-size: 1rem;
+  margin-bottom: 10px;
+  color: var(--text-color);
+}
+
+.unit-toggle {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  margin-bottom: 15px;
+}
+
+.unit-toggle label {
+  cursor: pointer;
+  font-weight: bold;
+  color: var(--text-color);
+}
+
+.btn-group {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 10px 0;
+}
+
+.dark .suggestions-list {
+  background: rgba(30, 30, 30, 0.95);
+  color: var(--text-color);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.dark .suggestions-list li:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.dark .active-suggestion {
+  background-color: rgba(255, 255, 255, 0.15);
+  font-weight: bold;
+}
+
+.dark .no-suggestion {
+  color: #bbb;
+}
+
+#background-effect {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  opacity: 1;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+#background-effect img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  animation: fadeIn 1s ease-in-out;
+}
+
